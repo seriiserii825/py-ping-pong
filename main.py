@@ -1,6 +1,10 @@
+import time
 from turtle import Screen
-from Paddle import Paddle
+
 import screeninfo
+
+from Ball import Ball
+from Paddle import Paddle
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -29,8 +33,17 @@ screen.onkey(l_paddle.go_down, 'f')
 screen.onkey(r_paddle.go_up, 'Up')
 screen.onkey(r_paddle.go_down, 'Down')
 
+ball = Ball()
+ball.move()
+
+count = 1
+
 game_is_on = True
 while game_is_on:
     screen.update()
+    if count != 20:
+        time.sleep(0.1)
+        ball.move()
+        count += 1
 
 screen.exitonclick()
