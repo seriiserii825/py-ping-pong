@@ -5,6 +5,7 @@ import screeninfo
 
 from Ball import Ball
 from Paddle import Paddle
+from ScoreBoard import ScoreBoard
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -33,6 +34,8 @@ screen.onkey(r_paddle.go_down, 'Down')
 ball = Ball()
 ball.move()
 
+scoreboard = ScoreBoard(SCREEN_WIDTH, SCREEN_HEIGHT)
+
 game_is_on = True
 while game_is_on:
     screen.update()
@@ -46,5 +49,10 @@ while game_is_on:
     # Detect collision with paddle
     if ball.distance(r_paddle) < 50 and ball.xcor() > 320 or ball.distance(l_paddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
+    else:
+        if ball.xcor() > SCREEN_WIDTH // 2:
+            ball.reset_position()
+        elif ball.xcor() < -SCREEN_WIDTH // 2:
+            ball.reset_position()
 
 screen.exitonclick()
