@@ -15,9 +15,6 @@ monitor_height = monitor.height
 start_x = monitor_width // 2 - SCREEN_WIDTH // 2
 start_y = monitor_height // 2 - SCREEN_HEIGHT // 2
 
-# pong_screen = PongScreen()
-
-
 screen = Screen()
 screen.bgcolor('black')
 screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, startx=start_x, starty=start_y)
@@ -36,14 +33,12 @@ screen.onkey(r_paddle.go_down, 'Down')
 ball = Ball()
 ball.move()
 
-count = 1
-
 game_is_on = True
 while game_is_on:
     screen.update()
-    if count != 20:
-        time.sleep(0.1)
-        ball.move()
-        count += 1
+    time.sleep(0.1)
+    ball.move()
+    if ball.ycor() > SCREEN_HEIGHT // 2 - 20 or ball.ycor() < -SCREEN_HEIGHT // 2 + 20:
+        ball.bounce()
 
 screen.exitonclick()
