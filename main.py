@@ -52,7 +52,10 @@ while game_is_on:
     else:
         if ball.xcor() > SCREEN_WIDTH // 2:
             ball.reset_position()
-        elif ball.xcor() < -SCREEN_WIDTH // 2:
+            scoreboard.l_scored()
+
+        if ball.xcor() < -SCREEN_WIDTH // 2:
             ball.reset_position()
+            scoreboard.r_scored()
 
 screen.exitonclick()
