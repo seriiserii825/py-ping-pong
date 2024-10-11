@@ -1,4 +1,5 @@
-from turtle import Screen, Turtle
+from turtle import Screen
+from Paddle import Paddle
 from PongScreen import PongScreen
 
 # pong_screen = PongScreen()
@@ -9,26 +10,14 @@ screen.setup(width=800, height=600)
 screen.title('Pong Game')
 screen.tracer(0)
 
-paddle = Turtle()
-paddle.shape('square')
-paddle.penup()
-paddle.color('white')
-paddle.shapesize(stretch_wid=5, stretch_len=1)
-paddle.goto(350, 0)
-
-def go_up():
-    y = paddle.ycor()
-    y += 20
-    paddle.sety(y)
-
-def go_down():
-    y = paddle.ycor()
-    y -= 20
-    paddle.sety(y)
+l_paddle = Paddle((-350, 0))
+r_paddle = Paddle((350, 0))
 
 screen.listen()
-screen.onkey(go_up, 'Up')
-screen.onkey(go_down, 'Down')
+screen.onkey(l_paddle.go_up, 'w')
+screen.onkey(l_paddle.go_down, 's')
+screen.onkey(r_paddle.go_up, 'Up')
+screen.onkey(r_paddle.go_down, 'Down')
 
 game_is_on = True
 while game_is_on:
