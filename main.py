@@ -1,12 +1,22 @@
 from turtle import Screen
 from Paddle import Paddle
-from PongScreen import PongScreen
+import screeninfo
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+monitor = screeninfo.get_monitors()[0]
+monitor_width = monitor.width
+monitor_height = monitor.height
+start_x = monitor_width // 2 - SCREEN_WIDTH // 2
+start_y = monitor_height // 2 - SCREEN_HEIGHT // 2
 
 # pong_screen = PongScreen()
 
+
 screen = Screen()
 screen.bgcolor('black')
-screen.setup(width=800, height=600)
+screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, startx=start_x, starty=start_y)
 screen.title('Pong Game')
 screen.tracer(0)
 
@@ -14,8 +24,8 @@ l_paddle = Paddle((-350, 0))
 r_paddle = Paddle((350, 0))
 
 screen.listen()
-screen.onkey(l_paddle.go_up, 'w')
-screen.onkey(l_paddle.go_down, 's')
+screen.onkey(l_paddle.go_up, 'd')
+screen.onkey(l_paddle.go_down, 'f')
 screen.onkey(r_paddle.go_up, 'Up')
 screen.onkey(r_paddle.go_down, 'Down')
 
